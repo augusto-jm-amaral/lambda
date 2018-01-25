@@ -12,7 +12,7 @@ const compose = (f, g) => x => f(g(x))
 
 `f` e `g` são funções e `x` é o valor "canalizado" através delas.
 
-Composição é uma funções de criação. Você criador de funções, seleciona duas com traços que deseja combinar e as junta para gerar uma nova função.
+Composição é uma função de criação. Você criador de funções, seleciona duas com traços que deseja combinar e as junta para gerar uma nova função.
 
 ```js
 const toUpperCase = x => x.toUpperCase()
