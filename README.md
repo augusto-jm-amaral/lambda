@@ -91,5 +91,24 @@ const loudLastUpper = compose(angry, last);
 Não há respostas certas ou erradas - Estamos apenas conectando nossos legos juntos e da maneira qu quisermos. Normalmente é melhor agrupar as funções de forma reutilizável como `last` e `angry`. Se
 
 ## Pointfree
+O Estilo Pointfree significa nunca dizer quais são os seus dados. Desculpa. Isso significa que a funções nunca devem mencionar o dado o qual operam. Funções de primeira classe, currying e composição jogam juntas para criar este estilo.
+```js
+// not pointfree because we mention the data: word
+const snakeCase = word => word.toLowerCase().replace(/\s+/ig, '_');
 
+// pointfree
+const snakeCase = compose(replace(/\s+/ig, '_'), toLowerCase);
+```
+Vejá como nos aplicamos parcialmente o `replace`? O que estamos fazendo é canalizando nossos dados através de cada função de 1 argumento. Currying nos ajuda a preparar nossas funções para apenas receber seus dados, operar sobre eles e passa-los adiante. Outra coisa é notar que você não precisa dos dados para construir suas funções na versão pointfree, equanto na versão pointful nos precisamos ter nossa "palavra" antes de qualquer coisa.
+
+Vejamos outro exemplo:
+```js
+// not pointfree because we mention the data: name
+const initials = name => name.split(' ').map(compose(toUpperCase, head)).join('. ');
+
+// pointfree
+const initials2 = compose(join('. '), map(compose(toUpperCase, head)), split(' '));
+
+initials('hunter stockton thompson'); // 'H. S. T'
+```
 ...
