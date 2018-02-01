@@ -111,4 +111,69 @@ const initials2 = compose(join('. '), map(compose(toUpperCase, head)), split(' '
 
 initials('hunter stockton thompson'); // 'H. S. T'
 ```
-...
+O código pointfree pode novamente, nos ajuda a remover nomes desnecessários e manter-nos conciso e genérico. Pointfree é um teste decisivo para programação funcional pois através dele sabemos que temos pequenas funções com entrada e saída. Não é possivel compor um loop `while` por exemplo. Estejá avisado, contudo, pointfree é uma espada de corte duplo e pode algumas vezes ofuscar a nossa intenção, nem todo código funcional é pointfree e isso é O.K. Vamos utilizar onde podemos e ficar com funções normais onde for necessário.
+
+## Debugging
+
+Existem alguns erros comuns no compose como o uso do `map`, uma função de dois argumentos, deve sempre primeiro aplicar o 1 parâmetro.
+
+```js
+// wrong - we end up giving angry an array and we partially applied map with who knows what.
+const latin = compose(map, angry, reverse);
+
+latin(['frog', 'eyes']); // error
+
+// right - each function expects 1 argument.
+const latin = compose(map(angry), reverse);
+
+latin(['frog', 'eyes']); // ['EYES!', 'FROG!'])
+```
+Se vocẽ estiver com problemas para debugar uma composição, podemos usar essa útil, mas impura função rastreadora para ver o que esta acontecendo.
+```js
+const trace = curry((tag, x) => {
+  console.log(tag, x);
+  return x;
+});
+
+const dasherize = compose(
+  join('-'),
+  toLower,
+  split(' '),
+  replace(/\s{2,}/ig, ' '),
+);
+
+dasherize('The world is a vampire');
+// TypeError: Cannot read property 'apply' of undefined
+```
+
+Algo esta errado aqui, vamos rastrear.
+```js
+const dasherize = compose(
+  join('-'),
+  toLower,
+  trace('after split'),
+  split(' '),
+  replace(/\s{2,}/ig, ' '),
+);
+
+dasherize('The world is a vampire');
+// after split [ 'The', 'world', 'is', 'a', 'vampire' ]
+```
+Ah! Precisamos passar o `toLower` como argumento para o `map` pois ele trabalha em uma matriz.
+```
+const dasherize = compose(
+  join('-'),
+  map(toLower),
+  split(' '),
+  replace(/\s{2,}/ig, ' '),
+);
+
+dasherize('The world is a vampire'); // 'the-world-is-a-vampire'
+```
+
+A função de rastremento nos ajuda a ver os dados em determinado ponto com a finalidade de debugar. Linguagens como haskell e purescript tem funções similares para facilidade do desenvolvedor.
+
+COmposiçõ é uma ferramenta para contruir programas e, e com sorte o faria, é apoiada por uma teoria que garante que as coisas funcionem para nós. Vamos examinar essa teoria.
+
+## Teoria das categorias
+
