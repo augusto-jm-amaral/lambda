@@ -88,7 +88,7 @@ const loudLastUpper = compose(angry, last);
 
 // more variations...
 ```
-Não há respostas certas ou erradas - Estamos apenas conectando nossos legos juntos e da maneira qu quisermos. Normalmente é melhor agrupar as funções de forma reutilizável como `last` e `angry`. Se
+Não há respostas certas ou erradas - Estamos apenas conectando nossos legos juntos e da maneira qu quisermos. Normalmente é melhor agrupar as funções de forma reutilizável como `last` e `angry`.
 
 ## Pointfree
 O Estilo Pointfree significa nunca dizer quais são os seus dados. Desculpa. Isso significa que a funções nunca devem mencionar o dado o qual operam. Funções de primeira classe, currying e composição jogam juntas para criar este estilo.
