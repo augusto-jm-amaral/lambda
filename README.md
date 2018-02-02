@@ -173,7 +173,7 @@ dasherize('The world is a vampire'); // 'the-world-is-a-vampire'
 
 A função de rastremento nos ajuda a ver os dados em determinado ponto com a finalidade de debugar. Linguagens como haskell e purescript tem funções similares para facilidade do desenvolvedor.
 
-COmposiçõ é uma ferramenta para contruir programas e, e com sorte o faria, é apoiada por uma teoria que garante que as coisas funcionem para nós. Vamos examinar essa teoria.
+Composição é uma ferramenta para contruir programas e, e com sorte o faria, é apoiada por uma teoria que garante que as coisas funcionem para nós. Vamos examinar essa teoria.
 
 ## Teoria das categorias
 
