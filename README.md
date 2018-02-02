@@ -177,3 +177,53 @@ COmposiçõ é uma ferramenta para contruir programas e, e com sorte o faria, é
 
 ## Teoria das categorias
 
+...
+
+## Em Suma
+
+Composição conecta suas funções como uma serie de tubos. Os dados fluirão através da nossa aplicação tal como devem - funções puras são entradas para gerar uma saida depois de tudo, então quebrar essa cadeia iria trazer um resultado inesperado, tornando nosso software inútil.
+
+Nós mantemos a composição como um princípio de design acima de todos os outros. Isto é porque queremos mantes nossa aplicação simples e razoável. A teoria das categorias vai desempenhar um papel importante na arquitetura de nossa aplicação, na modelagem de efeitos colaterais e garantindo a exatidão.
+
+## Exercício
+
+Para cada exercício, vamos considerar o objeto `Car` com a seguinte forma:
+
+```js
+{
+  name: 'Aston Martin One-77',
+  horsepower: 750,
+  dollar_value: 1850000,
+  in_stock: true,
+}
+```
+
+Use `compose()` para rescrever ad funções abaixo.
+
+```js
+const isLastInStock = (cars) => {  
+  const lastCar = last(cars)  
+  return prop('in_stock', lastCar)  
+}
+```
+---
+
+Considerando a função a seguir:
+
+```js
+const average = xs => reduce(add, 0, xs) / xs.length
+```
+
+Use a função `average` para refatorar `averageDollarValue` como uma composição.
+
+---
+
+Refatore `fastestCar` usando `compose()` e outras funções pointfree-style.
+
+```js
+const fastestCar = (cars) => {  
+  const sorted = sortBy(car => car.horsepower);  
+  const fastest = last(sorted);  
+  return concat(fastest.name, ' is the fastest');  
+}; 
+```
