@@ -176,8 +176,56 @@ A função de rastremento nos ajuda a ver os dados em determinado ponto com a fi
 Composição é uma ferramenta para contruir programas e, e com sorte o faria, é apoiada por uma teoria que garante que as coisas funcionem para nós. Vamos examinar essa teoria.
 
 ## Teoria das categorias
+A teoria das categorias é um ramo abstrato da matemática que pode formalizar conceitos de vários ramos diferentes, como teoria de conjuntos, teoria de tipos, teoria de grupo, lógica e muito mais. Trata principalmente de objetos, morfismos e transformações, o que reflete a programação de forma bastante próxima. Aqui está um gráfico dos mesmos conceitos vistos a partir de cada teoria separada.
 
-...
+![categories theory](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/images/cat_theory.png)
+
+Desculpe, não queria assustar você. Não espero que você esteja intimamente familiarizado com todos esses conceitos. Meu objetivo é mostrar-lhe a quantidade de duplicação que temos para que você possa ver por que a teoria das categorias visa unificar essas coisas.
+
+Na categoria teoria, temos algo chamado ... uma categoria. É definido como uma coleção com os seguintes componentes:
+
+- Uma coleção de objetos
+- Uma coleção de morfismos
+- Uma noção de composição nos morfismos
+- Um morfismo distinto chamado identidade
+
+A teoria das categorias é abstrata o suficiente para modelar muitas coisas, mas vamos aplicar isso aos tipos e funções, que é o que nos importa no momento.
+
+**Uma coleção de objetos.** Os objetos serão tipos de dados. Por exemplo, `String`, `Boolean`, `Number`, `Object`, etc. Nós geralmente visualizamos os tipos de dados como conjuntos de todos os valores possíveis. Pode-se olhar para `Boolean` como o conjunto de [true, false] e `Number` como o conjunto de todos os valores numéricos possíveis. Tratar tipos como conjuntos é útil porque podemos usar a teoria de conjuntos para trabalhar com eles.
+
+**Uma coleção de morfismos.** Os morfismos serão nossas funções puras de cada dia.
+
+**Uma noção de composição sobre os morfismos.** Isso, como você pode ter imaginado, é o nosso novo brinquedo - compor. Nós discutimos que nossa função de composição é associativa, o que não é coincidência, pois é uma propriedade que deve ser realizada para qualquer composição na teoria das categorias.
+
+Esta imagem demonstra a coposição:
+
+![without composition](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/images/cat_comp1.png)
+![composition](https://github.com/MostlyAdequate/mostly-adequate-guide/blob/master/images/cat_comp2.png)
+
+Este é o exemplo em código:
+```js
+const g = x => x.length;
+const f = x => x === 4;
+const isFourLetterWord = compose(f, g);
+```
+**Um morfismo distinto chamado identidade.** Vamos introduzir uma função útil chamada id. Esta função simplesmente toma alguma entrada e a cospe de volta. Dê uma olhada:
+```js
+const id = x => x;
+```
+
+Você pode se perguntar "O que, no inferno, é tão útil?". Usaremos amplamente esta função nos capítulos seguintes, mas por agora pense nela como uma função que pode suportar o nosso valor - uma função que se divide em dados todos os dias.
+
+`id` deve jogar bem com a composição. Aqui está uma propriedade que sempre é válida para cada função unária (unária: função de um argumento) f:
+```js
+// identity
+compose(id, f) === compose(f, id) === f;
+// true
+```
+Ei, é como a propriedade de identidade em números! Se isso não for imediatamente claro, leve algum tempo com ele. Compreenda a futilidade. Nós estaremos vendo id usado em todo o lugar em breve, mas por enquanto vemos que é uma função que atua como um suporte para um determinado valor. Isso é bastante útil quando se escreve um código sem ponto.
+
+Então, você tem, uma categoria de tipos e funções. Se esta é a sua primeira introdução, imagino que você ainda está um pouco confuso com o que é uma categoria e por que é útil. Construiremos esse conhecimento ao longo do livro. A partir deste momento, neste capítulo, nesta linha, você pode, pelo menos, vê-lo como fornecendo-nos algum conhecimento sobre composição, ou seja, as propriedades de associatividade e identidade.
+
+Quais são as outras categorias, você pergunta? Bem, podemos definir um para gráficos direcionados com sendo os objetos, as setas sendo morfismos e composição apenas sendo uma concatenação de caminho. Podemos definir com `Numbers` como `objetos` e >= como morfismos (na verdade, qualquer ordem parcial ou total pode ser uma categoria). Há montes de categorias, mas para os propósitos deste livro, nos ocuparemos apenas do definido acima. Nós já aramos o suficientemente a superfície e devemos seguir em frente.
 
 ## Em Suma
 
