@@ -198,7 +198,7 @@ Para cada exercício, vamos considerar o objeto `Car` com a seguinte forma:
 }
 ```
 
-Use `compose()` para rescrever ad funções abaixo.
+Use `compose()` para rescrever as funções abaixo.
 
 ```js
 const isLastInStock = (cars) => {  
