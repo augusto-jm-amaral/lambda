@@ -40,7 +40,7 @@ const last = compose(head, reverse);
 last(['jumpkick', 'roundhouse', 'uppercut']); // 'uppercut'
 ```
 
-`reverse` vai retornar a lista contrário while `head` devolve o primeiro item da lista. O resultado é a função `last`. A sequência de funções deve ser aparente aqui. Podemos definir a versão da esquerda para a direita, no entanto, desta forma nos refletimos a versão matemática muito mais de perto. Esta certo, a composição vem direto dos livros de matemática. Talvez seja a hora de olhar um propriedade é válida em toda composição.
+`reverse` vai retornar a lista contrário enquanto `head` devolve o primeiro item da lista. O resultado é a função `last`. A sequência de funções deve ser aparente aqui. Podemos definir a versão da esquerda para a direita, no entanto, desta forma nos refletimos a versão matemática muito mais de perto. Esta certo, a composição vem direto dos livros de matemática. Talvez seja a hora de olhar um propriedade é válida em toda composição.
 
 ```js
 // associativity
